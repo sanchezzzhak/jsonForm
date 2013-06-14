@@ -6,7 +6,7 @@
  * @example jsonForm($('#form'));
  **/		
 jsonForm = function(el,isEmpty){
-	if(isEmpty==undefined) isEmpty = false;
+	var isEmpty = isEmpty || false;
 	var json_result = {},
 	input_txt = $(el).find('input,textarea,select');			
 	$.each(input_txt,function(key,item){	
