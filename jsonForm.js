@@ -1,16 +1,35 @@
 /**
  * https://github.com/sanchezzzhak/jsonForm
- * Получить из указаного элемента контейнера данные.
- * @param  el DOM Элемент контейнер
- * @param isEmpty bool Исключить из результата пустые данные 
+ * Получить из указаного элемента контейнера данные в виде JSON
+ * @param el DOM элемент контейнер
+ * @param options { 
+ *		isEmpty : true/false,         // Исключить из результата пустые данные
+ *		rules: {},                    // Массив в виде правил
+ *	}
  * @example jsonForm($('#form'));
  **/		
-jsonForm = function(el,isEmpty){
-	var isEmpty = isEmpty || false;
-	var json_result = {},
-	input_txt = $(el).find('input,textarea,select');			
-	$.each(input_txt,function(key,item){	
+jsonForm = function(el,options){
+	var 
+		json_result = {}, 
+		json_errors = {},
+		json_rule_message = {};
+	
+	options.isEmpty = options.isEmpty || false;
+	
+	var	input_arr   = $(el).find('input,textarea,select');	
+	
+	/* 
+	* Валидация полей по правилам из аттребутов инпута
+	* @param el 
+	*/
+	var validation = function(el){
+	
+	};
+		
+	$.each(input_arr,function(key,item){	
 		if($(item).is('[name]')){
+		
+		
 			var type = $(item).attr('type') , val = $(item).val();
 			if((type=='radio' || type=='checkbox')){
 				if(!$(item).is(':checked')) return true; 
@@ -26,7 +45,10 @@ jsonForm = function(el,isEmpty){
 			}else{
 				json_result[name] = val;
 			}
+			
+			
 		}
 	});
+	
 	return json_result;
 }
